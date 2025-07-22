@@ -5,9 +5,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const popup = document.getElementById("whatsapp-popup");
   const sound = document.getElementById("whatsapp-sound");
-  let hasPlayedSound = false; // impede reprodução repetida
+  let hasPlayedSound = false;
 
-  document.addEventListener("scroll", () => {
+  function checkScroll() {
     if (window.scrollY > 300) {
       if (!popup.classList.contains("visible")) {
         popup.classList.add("visible");
@@ -19,10 +19,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } else {
       popup.classList.remove("visible");
-      hasPlayedSound = false; // permite tocar novamente em novo scroll
+      hasPlayedSound = false;
+    }
+  }
+
+  window.addEventListener('scroll', checkScroll);
+  window.addEventListener('wheel', checkScroll);
+  window.addEventListener('touchmove', checkScroll);
+
+  window.addEventListener('keydown', e => {
+    const keysThatScroll = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Space'];
+    if (keysThatScroll.includes(e.code)) {
+      setTimeout(checkScroll, 50);
     }
   });
 });
+
 
 // 2. Carrossel Infinito com Clones nas Extremidades
 // ================================================
@@ -97,4 +109,6 @@ document.querySelectorAll('.carousel__slide img').forEach(img => {
 
 // 3.2 Fechar lightbox
 lightboxClose.addEventListener('click', () => lightbox.style.display = 'none');
-lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.style.display = 'none'; });
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) lightbox.style.display = 'none';
+});
