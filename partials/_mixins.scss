@@ -1,0 +1,10 @@
+// 1. Mixin de Transição
+// ---------------------
+// Este mixin simplifica a aplicação de transições CSS para duas propriedades.
+// Exemplo de uso: @include transition(transform, opacity);
+
+@mixin transition($prop1, $prop2) {
+  // Aplica transição de 0.3s com ease a cada propriedade
+  transition: #{$prop1} 0.3s ease,
+              #{$prop2} 0.3s ease;
+}

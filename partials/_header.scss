@@ -1,0 +1,138 @@
+// 1. Estrutura do Header
+// ----------------------
+header {
+  width: 100%;
+  padding: 1.5rem 0;
+}
+
+// 2. Container de Conteúdo do Header
+// ----------------------------------
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+
+    .header-logo {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// 3. Ícones do Header (LinkedIn)
+// --------------------------------
+.header-icons {
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+
+  a {
+    color: $branco;
+    transition: color 0.3s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $laranja-queimado;
+    }
+
+    i {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover i,
+    &:focus-visible i {
+      transform: translateY(-4px) scale(1.1);
+    }
+  }
+}
+
+// 4. Logo (Efeito de Inversão)
+// ---------------------------
+.header-logo {
+  a {
+    display: inline-block;
+    position: relative;
+
+    .logo-white,
+    .logo-color {
+      max-width: 140px;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.3s ease;
+      display: block;
+      width: 100%;
+    }
+
+    .logo-white {
+      filter: invert(100%) brightness(200%);
+      opacity: 1;
+      z-index: 2;
+      position: relative;
+    }
+
+    .logo-color {
+      opacity: 0;
+      z-index: 1;
+    }
+
+    &:hover .logo-white {
+      opacity: 0;
+    }
+
+    &:hover .logo-color {
+      opacity: 1;
+    }
+  }
+}
+
+// 5. Botão Dúvidas? (Estilo e Hover)
+// ----------------------------------
+.header-button {
+  background-color: #fff;
+  color: $laranja-queimado;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: $laranja-queimado;
+    color: $branco;
+    transform: translateY(-2px);
+  }
+}
+
+// 6. Animação de Slide para Ícones
+// --------------------------------
+@keyframes slideDownFade {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// 7. Disparo Simultâneo de Animação
+// ----------------------------------
+.logo,
+.linkedin-icon,
+.duvidas-icon {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDownFade 0.6s ease-out forwards;
+  display: inline-block;
+}
